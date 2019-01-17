@@ -24,4 +24,13 @@ const Features = props => {
     </CardContent>
   </Card>);
 }
+
+Features.propsType = {
+  row: PropTypes.array
+}
+
+Features.defaultProps = {
+  row: []
+}
+
 export default Features;

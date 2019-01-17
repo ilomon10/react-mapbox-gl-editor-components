@@ -10,12 +10,10 @@ const Map = MapboxGl({
 });
 
 export default class App extends Component {
-  map;
   render() {
     return (
       <div>
         <Map
-          ref={node => this.map = node}
           style="mapbox://styles/mapbox/streets-v9" // eslint-disable-line
           containerStyle={{
             height: '100vh',

@@ -1,10 +1,10 @@
 {
-  "name": "mapbox-gl-editor-components",
-  "version": "1.0.0",
+  "name": "react-mapbox-gl-editor-components",
+  "version": "0.1.0",
   "description": "",
   "author": "ilomon10",
   "license": "MIT",
-  "repository": "ilomon10/mapbox-gl-editor-components",
+  "repository": "ilomon10/react-mapbox-gl-editor-components",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
