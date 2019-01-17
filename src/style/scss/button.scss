@@ -1,0 +1,17 @@
+@import 'mixin';
+
+.button {
+  @include round;
+  padding: 6px;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background-color: rgba(0,0,0,0.07);
+  }
+  &:disabled {
+    background-color: rgba(0,0,0,0.15);
+    cursor: not-allowed;
+  }
+}

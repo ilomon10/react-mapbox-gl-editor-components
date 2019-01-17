@@ -1,0 +1,23 @@
+@import 'mixin';
+
+.list {
+  margin-left: -6px;
+  margin-right: -6px;
+
+  .listItem {
+    padding: 6px;
+    display: block;
+    width: 100%;
+    text-align: left;
+
+    &.listItemSelected {
+      background-color: rgba(0,0,0,0.05);
+    }
+  }
+
+  button.listItem {
+    >span {
+      text-transform: initial;
+    }
+  }
+}

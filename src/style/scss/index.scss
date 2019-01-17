@@ -1,0 +1,78 @@
+@import 'mixin';
+
+* {
+  box-sizing: border-box;
+}
+
+.componentContainer {
+  width: 200px;
+  pointer-events: none;
+}
+
+.componentWrapper {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: block;
+  left: 0;
+  opacity: 1;
+  transition: left 200ms ease, opacity 200ms ease;
+
+  &~div[class=mapboxgl-ctrl-top-left] {
+    margin-left: 200px;
+    transition: margin-left 200ms ease;
+  }
+
+  &.hide {
+    left: -200px;
+    opacity: 0;
+
+    &~div[class=mapboxgl-ctrl-top-left] {
+      margin-left: 0;
+    }
+  }
+}
+
+@keyframes hide {
+  1% {
+    opacity: 1;
+    display: block;
+    left: 0;
+  }
+
+  99% {
+    display: block;
+  }
+
+  100% {
+    opacity: 0;
+    left: -200px;
+    display: none;
+  }
+}
+
+@keyframes show {
+  1% {
+    opacity: 0;
+    display: block;
+    left: -200px;
+  }
+
+  99% {
+    display: block;
+  }
+
+  100% {
+    opacity: 1;
+    left: 0;
+    display: none;
+  }
+}
+
+.test {
+  display: inline-block;
+  margin: 2em auto;
+  border: 2px solid #000;
+  font-size: 2em;
+}

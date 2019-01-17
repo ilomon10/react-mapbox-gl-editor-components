@@ -22,11 +22,14 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
+    "@mapbox/mapbox-gl-draw": "^1.0.2",
     "prop-types": "^15.5.4",
     "react": "^15.0.0 || ^16.0.0",
-    "react-dom": "^15.0.0 || ^16.0.0"
+    "react-dom": "^15.0.0 || ^16.0.0",
+    "react-mapbox-gl": "^2.5.0 || ^3.9.2"
   },
   "devDependencies": {
+    "@mapbox/mapbox-gl-draw": "^1.1.1",
     "@svgr/rollup": "^2.4.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.5",
@@ -44,8 +47,10 @@
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
     "gh-pages": "^1.2.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "mapbox-gl": "^0.52.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.1",
+    "react-mapbox-gl": "^3.9.2",
     "react-scripts": "^1.1.4",
     "rollup": "^0.64.1",
     "rollup-plugin-babel": "^3.0.7",

@@ -7,6 +7,7 @@
 ## Install
 
 ```bash
+npm install --save react@16.2.x react-mapbox-gl@3.9.2 react-dom@16.2.x // peerDependencies
 npm install --save mapbox-gl-editor-components
 ```
 
