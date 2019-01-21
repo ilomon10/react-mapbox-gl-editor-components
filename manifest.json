@@ -1,0 +1,8 @@
+{
+  "short_name": "react-mapbox-gl-editor-components",
+  "name": "react-mapbox-gl-editor-components",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
