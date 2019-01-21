@@ -8,7 +8,7 @@
 
 ```bash
 npm install --save react@16.2.x react-dom@16.2.x react-mapbox-gl@3.9.2 @mapbox/mapbox-gl-draw@1.0.2 // peerDependencies
-npm install --save react-mapbox-gl-editor-components
+npm install --save react-mapbox-gl-editor-components@beta
 ```
 
 ## Usage
