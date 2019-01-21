@@ -18,6 +18,7 @@ class FeatureSelected extends React.Component {
   }
   render() {
     const row = this.props.row.filter(feature => feature.isSelected).map((val, id) => {
+      const isPropertyExist = typeof val.getProperty(this.state.keyValue) === 'undefined';
       return (
         <Card key={id}>
           <CardContent>
@@ -32,11 +33,19 @@ class FeatureSelected extends React.Component {
                     placeholder='key' />
                 </div>
                 <div className={flexStyle['flex-child']} style={{ width: '50%' }}>
-                  <Button
-                    disabled={!(this.state.keyValue !== '')}
-                    style={{ display: 'block', width: '100%' }}
-                    onClick={this._onClick.bind(this, val)}
-                  >Create</Button>
+                  {isPropertyExist &&
+                    <Button
+                      disabled={!(this.state.keyValue !== '')}
+                      style={{ display: 'block', width: '100%' }}
+                      onClick={this._onClick.bind(this, 'create', val)}
+                    >Create</Button>}
+                  {isPropertyExist === false &&
+                    <Button
+                      disabled={!(this.state.keyValue !== '')}
+                      style={{ display: 'block', width: '100%' }}
+                      color='warning'
+                      onClick={this._onClick.bind(this, 'delete', val)}
+                    >Delete</Button>}
                 </div>
               </ListItem>
             </List>
@@ -48,8 +57,17 @@ class FeatureSelected extends React.Component {
       {row}
     </div >);
   }
-  _onClick(val) {
-    val.setProperty(this.state.keyValue, '')
+  _onClick(state, val) {
+    switch (state) {
+      case 'create':
+        val.setProperty(this.state.keyValue, '');
+        break;
+      case 'delete':
+        val.setProperty(this.state.keyValue, undefined);
+        break;
+      default:
+        console.error(`Invalid onClick State, expected ${state}.`);
+    }
     this.setState({ keyValue: '' })
   }
 }

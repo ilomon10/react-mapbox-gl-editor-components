@@ -14,4 +14,10 @@
     background-color: rgba(0,0,0,0.15);
     cursor: not-allowed;
   }
+  &.warning {
+    color: red;
+    &:hover {
+      background-color: rgba(red, 0.07)
+    }
+  }
 }

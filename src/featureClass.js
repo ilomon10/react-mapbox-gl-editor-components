@@ -60,8 +60,8 @@ export default class FeatureClass {
   getGeometry() {
     return this.get().geometry;
   };
-  getProperty() {
-    return this.get().property;
+  getProperty(key) {
+    return this.get().properties[key];
   };
   delete() {
     this.draw.delete(this.featureId);
