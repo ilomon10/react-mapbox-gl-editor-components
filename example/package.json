@@ -1,13 +1,13 @@
 {
-  "name": "mapbox-gl-editor-components-example",
-  "homepage": "https://ilomon10.github.io/mapbox-gl-editor-components",
+  "name": "react-mapbox-gl-editor-components-example",
+  "homepage": "https://ilomon10.github.io/react-mapbox-gl-editor-components",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "@mapbox/mapbox-gl-draw": "^1.0.2",
     "mapbox-gl": "^0.52.0",
-    "mapbox-gl-editor-components": "file:..",
+    "react-mapbox-gl-editor-components": "file:..",
     "prop-types": "^15.6.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.1",

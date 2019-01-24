@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import MapboxGlDraw from '@mapbox/mapbox-gl-draw'
+import MapboxGlDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js'
 
 import ToggleControl from './components/toggleControl'
 
@@ -10,9 +10,39 @@ import Features from './features';
 import FeatureSelected from './featureSelected';
 import FeatureClass from './featureClass';
 
-export default class AdapterComponent extends React.Component {
+const noop = () => { /* Nothing */ }
+
+class AdapterComponent extends React.Component {
   static contextTypes = {
     map: PropTypes.object.isRequired
+  }
+
+  static propTypes = {
+    drawControl: PropTypes.func,
+    onControlReady: PropTypes.func,
+    onDrawCreate: PropTypes.func,
+    onDrawDelete: PropTypes.func,
+    onDrawUpdate: PropTypes.func,
+    onDrawCombine: PropTypes.func,
+    onDrawUncombine: PropTypes.func,
+    onDrawSelectionChange: PropTypes.func,
+    onDrawModeChange: PropTypes.func,
+    onDrawRender: PropTypes.func,
+    onDrawActionable: PropTypes.func,
+  }
+
+  static defaultProps = {
+    drawControl: noop,
+    onControlReady: noop,
+    onDrawCreate: noop,
+    onDrawDelete: noop,
+    onDrawUpdate: noop,
+    onDrawCombine: noop,
+    onDrawUncombine: noop,
+    onDrawSelectionChange: noop,
+    onDrawModeChange: noop,
+    onDrawRender: noop,
+    onDrawActionable: noop,
   }
 
   state = {
@@ -36,10 +66,31 @@ export default class AdapterComponent extends React.Component {
   }
   componentDidMount() {
     const { map } = this.context;
+    const {
+      drawControl,
+      onControlReady,
+      onDrawUpdate,
+      onDrawCombine,
+      onDrawUncombine,
+      onDrawModeChange,
+      onDrawRender,
+      onDrawActionable,
+    } = this.props;
+
     map._controlContainer.insertBefore(this._container, map._controlContainer.firstChild);
     map.on('draw.create', this._onDrawCreate.bind(this));
     map.on('draw.delete', this._onDrawDelete.bind(this));
     map.on('draw.selectionchange', this._onDrawSelectionChange.bind(this));
+
+    map.on('draw.update', onDrawUpdate);
+    map.on('draw.combine', onDrawCombine);
+    map.on('draw.uncombine', onDrawUncombine);
+    map.on('draw.modechange', onDrawModeChange);
+    map.on('draw.render', onDrawRender);
+    map.on('draw.actionable', onDrawActionable);
+
+    drawControl(this._draw);
+    onControlReady(this._toggleControl);
   }
   componentWillUnmount() {
     const { map } = this.context;
@@ -67,8 +118,9 @@ export default class AdapterComponent extends React.Component {
       hide: !oState.hide
     }))
   }
-
+  
   _onDrawCreate(ev) {
+    const { onDrawCreate } = this.props;
     const features = ev.features.map(e => {
       return new FeatureClass({
         draw: this._draw,
@@ -81,9 +133,11 @@ export default class AdapterComponent extends React.Component {
     })
     this.setState(props => ({
       features: [...props.features, ...features],
-    }))
+    }));
+    onDrawCreate(ev);
   }
   _onDrawDelete(ev) {
+    const { onDrawDelete } = this.props;
     const ids = ev.features.map((val) => {
       return val.id;
     })
@@ -95,8 +149,10 @@ export default class AdapterComponent extends React.Component {
     this.setState({
       features,
     });
+    onDrawDelete(ev);
   }
   _onDrawSelectionChange(ev) {
+    const { onDrawSelectionChange } = this.props;
     const filters = ev.features.map((val) => val.id);
     for (const feature of this.state.features) {
       if (~filters.indexOf(feature.featureId)) {
@@ -106,8 +162,11 @@ export default class AdapterComponent extends React.Component {
       }
     }
     this.forceUpdate();
+    onDrawSelectionChange(ev);
   }
   _onFeatureHandler() {
     this.forceUpdate();
   }
 }
+
+export default AdapterComponent;
